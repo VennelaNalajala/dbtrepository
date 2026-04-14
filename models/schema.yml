@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_bookings
+    columns:
+      - name: booking_id
+        tests:
+          - not_null
+          - unique
+
+  - name: intermediate
+    columns:
+      - name: booking_id
+        tests:
+          - not_null
+
+      - name: listing_id
+        tests:
+          - not_null
+
+  - name: marts
+    columns:
+      - name: host_id
+        tests:
+          - not_null
+
+      - name: total_revenue
+        tests:
+          - not_null
+          
