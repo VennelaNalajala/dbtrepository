@@ -5,3 +5,4 @@ SELECT
     SUM(booking_amount) AS total_revenue
 FROM {{ ref('intermediate') }}
 GROUP BY host_id, host_name
+
