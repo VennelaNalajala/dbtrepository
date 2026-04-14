@@ -1,0 +1,25 @@
+name: dbt CI Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  dbt-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dbt Snowflake
+        run: pip install dbt-snowflake
+
+      - name: Run dbt build
+        run: dbt build
