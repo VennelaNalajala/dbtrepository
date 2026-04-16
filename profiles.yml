@@ -1,0 +1,13 @@
+ecommerce_project:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: RHPZJRX-ZN50394          
+      user: NALAJALAVENNELA
+      password: Nalajalavennela@0622
+      role: ACCOUNTADMIN               
+      database: dbt_with_snowflake
+      schema: dbt_with_snowflake_sch
+      warehouse: COMPUTE_WH     
+      threads: 4
