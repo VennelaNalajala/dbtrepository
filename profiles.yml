@@ -3,11 +3,11 @@ ecommerce_project:
   outputs:
     DEV:
       type: snowflake
-      account: RHPZJRX-ZN50394          
-      user: NALAJALAVENNELA
-      password: Nalajalavennela@0622
-      role: ACCOUNTADMIN               
-      database: dbt_with_snowflake
-      schema: dbt_with_snowflake_sch
-      warehouse: COMPUTE_WH     
+      account: "{{ env_var('DBT_ACCOUNT') }}"
+      user: "{{ env_var('DBT_USER') }}"
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      role: "{{ env_var('DBT_ROLE') }}"
+      database: "{{ env_var('DBT_DATABASE') }}"
+      schema: "{{ env_var('DBT_SCHEMA') }}"
+      warehouse: "{{ env_var('DBT_WAREHOUSE') }}"
       threads: 4
