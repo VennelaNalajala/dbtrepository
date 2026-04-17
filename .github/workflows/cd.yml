@@ -1,0 +1,31 @@
+name: CD - dbt Deployment
+
+on:
+push:
+branches: [ main ]
+
+jobs:
+dbt-cd:
+runs-on: ubuntu-latest
+
+```
+steps:
+  - name: Checkout code
+    uses: actions/checkout@v4
+
+  - name: Install Snowflake CLI
+    run: pip install snowflake-cli
+
+  - name: Deploy dbt project
+    run: |
+      snow dbt deploy my_dbt_project \
+        --source . \
+        --profiles-dir ~/.dbt \
+        --default-target prod \
+        --dbt-version 1.7 \
+        --force
+
+  - name: Run dbt project
+    run: |
+      snow dbt run my_dbt_project
+```
