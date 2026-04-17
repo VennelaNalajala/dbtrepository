@@ -27,5 +27,5 @@ steps:
 
   - name: Run dbt project
     run: |
-      snow dbt run my_dbt_project
+      snow dbt run ecommerce_project
 ```
