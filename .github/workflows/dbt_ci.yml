@@ -1,25 +1,39 @@
-name: dbt CI Check
+name: CI - dbt Testing
 
 on:
-  pull_request:
-    branches:
-      - main
+pull_request:
+branches: [ main ]
 
 jobs:
-  dbt-test:
-    runs-on: ubuntu-latest
+dbt-ci:
+runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+```
+steps:
+  - name: Checkout code
+    uses: actions/checkout@v4
 
-      - name: Install Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
+  - name: Install dbt
+    run: pip install dbt-snowflake
 
-      - name: Install dbt Snowflake
-        run: pip install dbt-snowflake
+  - name: Create profiles.yml
+    run: |
+      mkdir -p ~/.dbt
+      echo "
+      my_project:
+        target: dev
+        outputs:
+          dev:
+            type: snowflake
+            account: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+            user: ${{ secrets.SNOWFLAKE_USER }}
+            password:${{secrets.SNOWFLAKE_PASSWORD }}
+            role: ${{ secrets.SNOWFLAKE_ROLE }}
+            warehouse: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+            database: ${{ secrets.SNOWFLAKE_DATABASE }}
+            schema: ${{ secrets.SNOWFLAKE_SCHEMA }}
+      " > ~/.dbt/profiles.yml
 
-      - name: Run dbt build
-        run: dbt build
+  - name: Run dbt build
+    run: dbt build
+```
